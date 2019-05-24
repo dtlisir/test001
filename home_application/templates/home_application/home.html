@@ -1,0 +1,456 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>蓝鲸开发框架</title>
+    {{ block.super }}
+{% endblock %}
+
+{% block navigation %}
+    <li class="king-navbar-active"><a href="{{ SITE_URL }}"><span>首页</span></a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="king-page-box">
+        <div class="king-container clearfix" style="width: 1024px">
+            <div class="king-block king-block-bordered king-block-themed m20">
+                <div class="king-block-header king-info">
+                    <ul class="king-block-options">
+                        <li>
+                            <!-- <button type="button"><i class="fa fa-cog"></i></button> -->
+                        </li>
+                    </ul>
+                    <h3 class="king-block-title">查询主机信息</h3>
+                </div>
+                <div class="king-block-content">
+                    <form class="form-horizontal">
+                        <div class="form-group clearfix ">
+                            <label class="col-sm-1 control-label bk-lh30 pt0">业务：</label>
+                            <div class="col-sm-3">
+                                <select name="" id="biz_id" class="form-control bk-valign-top">
+
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <button type="button" class="king-btn mr10  king-success" onclick="search()">查 询
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <table id="table2_demo1" class="table table-bordered table-hover dataTable no-footer" role="grid">
+                        <thead>
+                        <tr role="row">
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 15%;">内网IP</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 15%;">云区域</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 15%;">集群名</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 15%;">模块名</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 15%;">外网IP</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 15%;">维护人</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 10%;">详细信息</th>
+                        </tr>
+                        </thead>
+                    </table>
+                    <template id="biz_tpl">
+                        <option value="#id#">#name#</option>
+                    </template>
+                    <div class="container-fluid mb0 ">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <table class="table mb0 pr15 ranger-box ">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 100px;">#</th>
+                                        <th style="width: 20%;">任务</th>
+                                        <th style="width: 20%;">进度</th>
+                                        <th style="width: 20%;">开发者</th>
+                                        <th>结束时间</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td style="width: 100px;">1</td>
+                                        <td style="width: 20%;">版本更新</td>
+                                        <td style="width: 20%;">完成</td>
+                                        <td style="width: 20%;">管理员</td>
+                                        <td>2015-09-20</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 100px;">2</td>
+                                        <td style="width: 20%;">数据备份</td>
+                                        <td style="width: 20%;">完成</td>
+                                        <td style="width: 20%;">管理员</td>
+                                        <td>2015-09-20</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 100px;">3</td>
+                                        <td style="width: 20%;">定时任务</td>
+                                        <td style="width: 20%;">完成</td>
+                                        <td style="width: 20%;">管理员</td>
+                                        <td>2015-09-20</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 100px;">4</td>
+                                        <td style="width: 20%;">修复bug</td>
+                                        <td style="width: 20%;">完成</td>
+                                        <td style="width: 20%;">管理员</td>
+                                        <td>2015-09-20</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="col-md-6">
+                                <table class="table mb0 pr15 ranger-box ">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 100px;">#</th>
+                                        <th style="width: 20%;">任务</th>
+                                        <th style="width: 20%;">进度</th>
+                                        <th style="width: 20%;">开发者</th>
+                                        <th>结束时间</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td style="width: 100px;">1</td>
+                                        <td style="width: 20%;">版本更新</td>
+                                        <td style="width: 20%;">完成</td>
+                                        <td style="width: 20%;">管理员</td>
+                                        <td>2015-09-20</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 100px;">2</td>
+                                        <td style="width: 20%;">数据备份</td>
+                                        <td style="width: 20%;">完成</td>
+                                        <td style="width: 20%;">管理员</td>
+                                        <td>2015-09-20</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 100px;">3</td>
+                                        <td style="width: 20%;">定时任务</td>
+                                        <td style="width: 20%;">完成</td>
+                                        <td style="width: 20%;">管理员</td>
+                                        <td>2015-09-20</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 100px;">4</td>
+                                        <td style="width: 20%;">修复bug</td>
+                                        <td style="width: 20%;">完成</td>
+                                        <td style="width: 20%;">管理员</td>
+                                        <td>2015-09-20</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <!-- 设置面板Start -->
+                                <template id="header_tpl_1558689265197">
+                                    <tr>
+                                        <th style="width: 100px;">#index#</th>
+                                        <th style="width: 20%;">#task#</th>
+                                        <th style="width: 20%;">#progress#</th>
+                                        <th style="width: 20%;">#host#</th>
+                                        <th>#date#</th>
+                                    </tr>
+                                </template>
+                                <template id="tpl_1558689265197">
+                                    <tr>
+                                        <td style="width: 100px;">#index#</td>
+                                        <td style="width: 20%;">#columnName1#</td>
+                                        <td style="width: 20%;">#columnName2#</td>
+                                        <td style="width: 20%;">#columnName3#</td>
+                                        <td>#columnName4#</td>
+                                    </tr>
+                                </template>
+                                <!-- 设置面板End -->
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="container-fluid mb0 ">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div style="height: 300px; -webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0); cursor: default;"
+                                     id="chart_1558688866271" class="king-chart-box chart-funnel "
+                                     _echarts_instance_="1558683569629"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <div style="height: 300px; -webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0); cursor: default;"
+                                     id="chart_1558688870486" class="king-chart-box chart-funnel "
+                                     _echarts_instance_="1558683569630"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <div style="height: 300px; -webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0); cursor: default;"
+                                     id="chart_1558688873267" class="king-chart-box chart-funnel "
+                                     _echarts_instance_="1558683569631"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block extra_block %}
+    <script>
+        function createEInstrumentChart(conf) {
+            //--- 仪表盘 ---
+            var myChart = echarts.init(document.getElementById(conf.selector));
+            myChart.setOption({
+                title: {},
+                tooltip: {
+                    formatter: "{a} <br/>{b} : {c}%"
+                },
+                toolbox: {
+                    show: false,
+                    feature: {
+                        mark: {show: true},
+                        restore: {show: true},
+                        saveAsImage: {show: true}
+                    }
+                },
+                series: [
+                    {
+                        name: '仪表盘',
+                        type: 'gauge',
+                        center: ['50%', '50%'],    // 默认全局居中
+                        radius: [0, '50%'],
+                        startAngle: 225,
+                        endAngle: -45,
+                        min: 0,                     // 最小值
+                        max: 100,                   // 最大值
+                        precision: 0,               // 小数精度，默认为0，无小数点
+                        splitNumber: 10,             // 分割段数，默认为5
+                        axisLine: {            // 坐标轴线
+                            show: true,        // 默认显示，属性show控制显示与否
+                            lineStyle: {       // 属性lineStyle控制线条样式
+                                color: [[0.2, '#30D878'], [0.8, '#3C96FF'], [1, '#FF5656']],
+                                width: 30
+                            }
+                        },
+                        axisTick: {            // 坐标轴小标记
+                            show: true,        // 属性show控制显示与否，默认不显示
+                            splitNumber: 5,    // 每份split细分多少段
+                            length: 8,         // 属性length控制线长
+                            lineStyle: {       // 属性lineStyle控制线条样式
+                                color: '#eee',
+                                width: 1,
+                                type: 'solid'
+                            }
+                        },
+                        axisLabel: {           // 坐标轴文本标签，详见axis.axisLabel
+                            show: true,
+                            formatter: function (v) {
+                                switch (v + '') {
+                                    case '0':
+                                        return '0';
+                                    case '20':
+                                        return '20';
+                                    case '40':
+                                        return '40';
+                                    case '60':
+                                        return '60';
+                                    case '80':
+                                        return '80';
+                                    case '100':
+                                        return '100';
+                                    default:
+                                        return '';
+                                }
+                            },
+                            textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                                color: '#333'
+                            }
+                        },
+                        splitLine: {           // 分隔线
+                            show: true,        // 默认显示，属性show控制显示与否
+                            length: 30,         // 属性length控制线长
+                            lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                                color: '#eee',
+                                width: 2,
+                                type: 'solid'
+                            }
+                        },
+                        pointer: {
+                            length: '60%',
+                            width: 8,
+                            color: 'auto'
+                        },
+                        title: {
+                            show: true,
+                            offsetCenter: [0, '100%'],       // x, y，单位px
+                            textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                                color: '#333',
+                                fontSize: 20
+                            },
+                        },
+                        detail: {
+                            show: true,
+                            backgroundColor: 'rgba(0,0,0,0)',
+                            borderWidth: 0,
+                            borderColor: '#ccc',
+                            width: 100,
+                            height: 40,
+                            offsetCenter: [0, '45%'],       // x, y，单位px
+                            formatter: '{value}%',
+                            textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                                color: 'auto',
+                                fontSize: 25
+                            }
+                        },
+                        // data: [{value: 50, name: '仪表盘'}]
+                        data: [conf.data],
+                    }
+                ]
+            });
+        }
+
+        function initEInstrumentChart(conf) {
+            $.ajax({
+                url: conf.url,
+                type: 'GET',
+                dataType: conf.dataType,
+                success: function (res) {
+                    //获取数据成功
+                    if (res.result) {
+                        var data = res.data;
+                        createEInstrumentChart({
+                            selector: conf.containerId, // 图表容器
+                            data: data, // 图表数据
+                        });
+                    }
+                }
+            })
+        }
+    </script>
+    <script>
+        {#$(function () {#}
+        {#    initEInstrumentChart({#}
+        {#        url: 'https://magicbox.bk.tencent.com/static_api/v3/components/chart25/demo.json',#}
+        {#        dataType: 'json',#}
+        {#        containerId: 'chart_1558600577948'#}
+        {#    });#}
+        {# });#}
+    </script>
+    <script>
+        {#$(function () {#}
+        {#    initEInstrumentChart({#}
+        {#        url: 'https://magicbox.bk.tencent.com/static_api/v3/components/chart25/demo.json',#}
+        {#        dataType: 'json',#}
+        {#        containerId: 'chart_1558600583917'#}
+        {#    });#}
+        {# });#}
+    </script>
+    <script>
+        {#$(function () {#}
+        {#    initEInstrumentChart({#}
+        {#        url: 'https://magicbox.bk.tencent.com/static_api/v3/components/chart25/demo.json',#}
+        {#        dataType: 'json',#}
+        {#        containerId: 'chart_1558600589048'#}
+        {#    });#}
+        {# });#}
+    </script>
+    <script>
+        function renderTpl(str, cfg) {
+            var re = /(#(.+?)#)/g;
+            return str.replace(re, function () {
+                var val = cfg[arguments[2]] + '';
+                if (typeof val == 'undefined') {
+                    val = '';
+                }
+                return val;
+            });
+        }
+
+        function get_detail(data) {
+            var host_detail = data;
+            var url = '${SITE_URL}' + 'api/get_log/' + celery_id + '/';
+            $.get(url, {}, function (res) {
+                if (res.result) {
+                    show_log(res.data);
+                } else {
+                    alert(res.message);
+                }
+            })
+        }
+
+        function show_detail(log_content) {
+            var d = dialog({
+                width: 800,
+                height: 500,
+                padding: 0,
+                //quickClose: true,
+                title: '日志详情',
+                content: log_content,
+            });
+            d.showModal();
+        }
+
+        function search() {
+            var biz_id = $('#biz_id').val();
+            var table = $('#table2_demo1').DataTable({
+                autoWidth: true,
+                processing: true,
+                paging: true, //隐藏分页
+                ordering: false, //关闭排序
+                info: true, //隐藏左下角分页信息
+                searching: false, //关闭搜索
+                pageLength: 5, //每页显示几条数据
+                lengthChange: false, //不允许用户改变表格每页显示的记录数
+                columns: [
+                    {data: "host_innerip"},
+                    {data: "cloud_name"},
+                    {data: "set_name"},
+                    {data: "module_name"},
+                    {data: "host_outerip"},
+                    {data: "operator"},
+                    {
+                        data: null,
+                        orderable: false,
+                        render: function (data) {
+                            return '<a class="king-btn king-info" href="javascript: get_detail(' + data.host_detail + ');">查 看</a>';
+                        }
+                    }
+                ],
+                ajax: {
+                    url: '{{ SITE_URL }}get_host_by_bizid/',
+                    type: 'POST',
+                    dataType: 'json',
+                    dataSrc: 'data',
+                    data: {'biz_id': biz_id},
+
+                },
+                language: {
+                    search: '搜索：',
+                    processing: '加载中',
+                    lengthMenu: "每页显示 _MENU_ 记录",
+                    zeroRecords: "没找到相应的数据！",
+                    info: "分页 _PAGE_ / _PAGES_",
+                    infoEmpty: "暂无数据！",
+                    infoFiltered: "(从 _MAX_ 条数据中搜索)",
+                    paginate: {
+                        first: '首页',
+                        last: '尾页',
+                        previous: '上一页',
+                        next: '下一页',
+                    }
+                }
+            });
+        }
+
+        $(function () {
+            $.get('{{ SITE_URL }}get_biz_list/', function (res) {
+                if (res.result) {
+                    console.log(res.data);
+                    var _html = '';
+                    var list = res.data;
+                    var tpl = $('#biz_tpl').html();
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        var item = list[i];
+                        _html += renderTpl(tpl, item)
+                    }
+                    $('#biz_id').html(_html);
+                } else {
+                    console.log("获取失败");
+                }
+            }, 'json')
+        });
+    </script>
+{% endblock %}

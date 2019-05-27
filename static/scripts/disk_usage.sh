@@ -1,0 +1,1 @@
+df -h | awk '($6=="/"){print $5}' | cut -d% -f1

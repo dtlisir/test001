@@ -1,0 +1,1 @@
+free -m | sed -n '2p' | awk '{printf("%d\n",($3/$2)*100)}'

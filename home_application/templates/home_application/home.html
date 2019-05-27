@@ -57,22 +57,37 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">主机信息</h4>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
                 </div>
                 <div class="modal-body">
-                    <ul class="list-group" id="host_detail">
 
+                    <ul id="myTab" class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#home" data-toggle="tab">
+                                详细信息
+                            </a>
+                        </li>
+                        <li><a href="#ios" data-toggle="tab">实时数据</a></li>
                     </ul>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div style="height: 300px; -webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0); cursor: default;"
-                                 id="chart_1558946888521" class="king-chart-box chart-funnel "
-                                 _echarts_instance_="1558946856870"></div>
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade in active" id="home">
+                            <ul class="list-group" id="host_detail">
+
+                            </ul>
                         </div>
-                        <div class="col-md-6">
-                            <div style="height: 300px; -webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0); cursor: default;"
-                                 id="chart_1558946897217" class="king-chart-box chart-funnel "
-                                 _echarts_instance_="1558946856871"></div>
+                        <div class="tab-pane fade" id="ios">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div style="height: 300px; -webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0); cursor: default;"
+                                         id="chart_1558946888521" class="king-chart-box chart-funnel "
+                                         _echarts_instance_="1558946856870"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div style="height: 300px; -webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0); cursor: default;"
+                                         id="chart_1558946897217" class="king-chart-box chart-funnel "
+                                         _echarts_instance_="1558946856871"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -97,115 +112,7 @@
 {% endblock %}
 {% block extra_block %}
     <script>
-        function renderTpl(str, cfg) {
-            var re = /(#(.+?)#)/g;
-            return str.replace(re, function () {
-                var val = cfg[arguments[2]] + '';
-                if (!val) {
-                    val = '--';
-                }
-                return val;
-            });
-        }
-
-        function search() {
-            var biz_id = $('#biz_id').val();
-            var table = $('#table2_demo1').DataTable({
-                autoWidth: true,
-                processing: true,
-                paging: true, //隐藏分页
-                ordering: false, //关闭排序
-                info: true, //隐藏左下角分页信息
-                searching: false, //关闭搜索
-                pageLength: 5, //每页显示几条数据
-                lengthChange: false, //不允许用户改变表格每页显示的记录数
-                columns: [
-                    {data: "host_innerip"},
-                    {data: "cloud_name"},
-                    {data: "set_name"},
-                    {data: "module_name"},
-                    {data: "operator"},
-                    {
-                        data: null,
-                        orderable: false,
-                        render: function (data) {
-                            return "<button class=\"king-btn king-info\" data-toggle=\"modal\" data-target=\"#myModal\" onclick=\"get_host_detail(" +
-                                biz_id + ",'" + data.host_innerip + "')\">查 看</button>";
-                        }
-                    }
-                ],
-                ajax: {
-                    url: '{{ SITE_URL }}get_host_by_bizid/',
-                    dataSrc: 'data',
-                    data: {'biz_id': biz_id},
-                },
-                language: {
-                    search: '搜索：',
-                    processing: '加载中',
-                    lengthMenu: "每页显示 _MENU_ 记录",
-                    zeroRecords: "没找到相应的数据！",
-                    info: "分页 _PAGE_ / _PAGES_",
-                    infoEmpty: "暂无数据！",
-                    infoFiltered: "(从 _MAX_ 条数据中搜索)",
-                    paginate: {
-                        first: '首页',
-                        last: '尾页',
-                        previous: '上一页',
-                        next: '下一页',
-                    }
-                }
-            });
-        }
-
-        function get_host_detail(biz_id, host_ip) {
-            $.get('{{ SITE_URL }}get_host_detail/',
-                {'biz_id': biz_id, 'host_ip': host_ip},
-                function (res) {
-                    if (res.result) {
-                        console.log(res.data);
-                        var _html = '';
-                        var tpl = $('#detail_tpl').html();
-                        _html += renderTpl(tpl, res.data);
-                        $('#host_detail').html(_html);
-                    } else {
-                        console.log("获取失败");
-                    }
-                }, 'json')
-        }
-
-        $(function () {
-            $.get('{{ SITE_URL }}get_biz_list/', function (res) {
-                if (res.result) {
-                    console.log(res.data);
-                    var _html = '';
-                    var list = res.data;
-                    var tpl = $('#biz_tpl').html();
-                    for (var i = 0, len = list.length; i < len; i++) {
-                        var item = list[i];
-                        _html += renderTpl(tpl, item)
-                    }
-                    $('#biz_id').html(_html);
-                } else {
-                    console.log("获取失败");
-                }
-            }, 'json')
-
-            $('#myModal').on('shown.bs.modal', function () {
-                initEInstrumentChart({
-                    url: '{{ SITE_URL }}get_host_mem_usage/',
-                    dataType: 'json',
-                    containerId: 'chart_1558946888521'
-                });
-                initEInstrumentChart({
-                    url: '{{ SITE_URL }}get_host_disk_usage/',
-                    dataType: 'json',
-                    containerId: 'chart_1558946897217'
-                });
-            })
-        });
-    </script>
-    <script>
-function createEInstrumentChart(conf) {
+        function createEInstrumentChart(conf) {
             //--- 仪表盘 ---
             var myChart = echarts.init(document.getElementById(conf.selector));
             myChart.setOption({
@@ -226,7 +133,7 @@ function createEInstrumentChart(conf) {
                         name: '仪表盘',
                         type: 'gauge',
                         center: ['50%', '50%'],    // 默认全局居中
-                        radius: [0, '50%'],
+                        radius: [0, '75%'],
                         startAngle: 225,
                         endAngle: -45,
                         min: 0,                     // 最小值
@@ -316,41 +223,136 @@ function createEInstrumentChart(conf) {
                 ]
             });
         }
-        function createEInstrumentChart(conf) {
-            //--- 仪表盘 ---
-            var myChart = echarts.init(document.getElementById(conf.selector));
-            myChart.setOption({
-                tooltip: {
-                    formatter: "{a} {b} : {c}%"
-                },
-                toolbox: {
-                    show: true,
-                    feature: {
-                        mark: {show: true},
-                        restore: {show: true},
-                        saveAsImage: {show: true}
-                    }
-                },
-                series: conf.data.series
-            });
-        }
 
         function initEInstrumentChart(conf) {
-            $.ajax({
-                url: conf.url,
-                type: 'GET',
-                dataType: conf.dataType,
-                success: function (res) {
+            $.get(conf.url, conf.data,
+                function (res) {
                     //获取数据成功
                     if (res.result) {
                         var data = res.data;
+                        console.log(data);
                         createEInstrumentChart({
                             selector: conf.containerId, // 图表容器
-                            data: data, // 图表数据
+                            data: {value: data.value, name: data.name}, // 图表数据
                         });
                     }
-                }
-            })
+                }, conf.dataType)
         }
+    </script>
+    <script>
+        function renderTpl(str, cfg) {
+            var re = /(#(.+?)#)/g;
+            return str.replace(re, function () {
+                var val = cfg[arguments[2]] + '';
+                if (!val) {
+                    val = '--';
+                }
+                return val;
+            });
+        }
+
+        function search() {
+            var biz_id = $('#biz_id').val();
+            var table = $('#table2_demo1').DataTable({
+                autoWidth: true,
+                processing: true,
+                paging: true, //隐藏分页
+                ordering: false, //关闭排序
+                info: true, //隐藏左下角分页信息
+                searching: false, //关闭搜索
+                pageLength: 5, //每页显示几条数据
+                lengthChange: false, //不允许用户改变表格每页显示的记录数
+                columns: [
+                    {data: "host_innerip"},
+                    {data: "cloud_name"},
+                    {data: "set_name"},
+                    {data: "module_name"},
+                    {data: "operator"},
+                    {
+                        data: null,
+                        orderable: false,
+                        render: function (data) {
+                            return "<button class=\"king-btn king-info\" data-toggle=\"modal\" data-target=\"#myModal\" onclick=\"get_host_detail(" +
+                                biz_id + ",'" + data.host_innerip + "')\">查 看</button>";
+                        }
+                    }
+                ],
+                ajax: {
+                    url: '{{ SITE_URL }}get_host_by_bizid/',
+                    dataSrc: 'data',
+                    data: {'biz_id': biz_id},
+                },
+                language: {
+                    search: '搜索：',
+                    processing: '加载中',
+                    lengthMenu: "每页显示 _MENU_ 记录",
+                    zeroRecords: "没找到相应的数据！",
+                    info: "分页 _PAGE_ / _PAGES_",
+                    infoEmpty: "暂无数据！",
+                    infoFiltered: "(从 _MAX_ 条数据中搜索)",
+                    paginate: {
+                        first: '首页',
+                        last: '尾页',
+                        previous: '上一页',
+                        next: '下一页',
+                    }
+                }
+            });
+        }
+
+        function get_host_detail(biz_id, host_ip) {
+            $('#myModalLabel').html(host_ip);
+            $.get('{{ SITE_URL }}get_host_detail/',
+                {'biz_id': biz_id, 'host_ip': host_ip},
+                function (res) {
+                    if (res.result) {
+                        console.log(res.data);
+                        var _html = '';
+                        var tpl = $('#detail_tpl').html();
+                        _html += renderTpl(tpl, res.data);
+                        $('#host_detail').html(_html);
+                    } else {
+                        console.log("获取失败");
+                    }
+                }, 'json');
+        }
+
+        $(function () {
+            $.get('{{ SITE_URL }}get_biz_list/', function (res) {
+                if (res.result) {
+                    console.log(res.data);
+                    var _html = '';
+                    var list = res.data;
+                    var tpl = $('#biz_tpl').html();
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        var item = list[i];
+                        _html += renderTpl(tpl, item)
+                    }
+                    $('#biz_id').html(_html);
+                } else {
+                    console.log("获取失败");
+                }
+            }, 'json');
+
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                // 获取已激活的标签页的名称
+
+                var activeTab = $(e.target).text();
+                if (activeTab == '实时数据'){
+                    initEInstrumentChart({
+                        url: '{{ SITE_URL }}get_host_mem_usage/',
+                        dataType: 'json',
+                        data: {'biz_id': 4, 'host_ip': '10.0.1.80'},
+                        containerId: 'chart_1558946888521'
+                     });
+                    initEInstrumentChart({
+                        url: '{{ SITE_URL }}get_host_disk_usage/',
+                        dataType: 'json',
+                        data: {'biz_id': 4, 'host_ip': '10.0.1.80'},
+                        containerId: 'chart_1558946897217'
+                    });
+                }
+            });
+        });
     </script>
 {% endblock %}

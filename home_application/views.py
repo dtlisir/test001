@@ -40,7 +40,8 @@ def get_host_by_bizid(request):
     """
     获取业务下IP
     """
-    biz_id = int(request.POST.get('biz_id'))
+    biz_id = int(request.GET.get('biz_id'))
+    result = {'result': 'false', 'data': {}}
     client = get_client_by_request(request)
     kwargs = {
         'bk_biz_id': biz_id,
@@ -70,11 +71,41 @@ def get_host_by_bizid(request):
                 'cloud_name': _d['host']['bk_cloud_id'][0]['bk_inst_name'],
                 'set_name': _d['set'][0]['bk_set_name'],
                 'module_name': _d['module'][0]['bk_module_name'],
-                'host_outerip': _d['host']['bk_host_outerip'],
                 'operator': _d['host']['operator'],
-                'host_detail': _d['host']
             })
-
-    result = {'data': host_list}
+        result = {'result': 'true', 'data': host_list}
     return JsonResponse(result)
+
+
+def get_host_detail(request):
+    """
+    获取主机详情
+    """
+    biz_id = int(request.GET.get('biz_id'))
+    ip = request.GET.get('host_ip')
+    result = {'result': 'false', 'data': {}}
+    client = get_client_by_request(request)
+    kwargs = {
+        'bk_biz_id': biz_id,
+        "ip": {
+            "data": [ip],
+            "exact": 1,
+            "flag": "bk_host_innerip"
+        }
+    }
+
+    resp = client.cc.search_host(**kwargs)
+
+    if resp['result']:
+        data = resp['data']['info'][0]['host']
+        result = {'result': 'true', 'data': data}
+    return JsonResponse(result)
+
+
+def get_host_mem_usage(request):
+    pass
+
+
+def get_host_disk_usage(request):
+    pass
 

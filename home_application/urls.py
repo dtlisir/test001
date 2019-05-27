@@ -21,4 +21,7 @@ urlpatterns = (
     url(r'^$', views.home),
     url(r'^get_biz_list/$', views.get_biz_list),
     url(r'^get_host_by_bizid/$', views.get_host_by_bizid),
+    url(r'^get_host_detail/$', views.get_host_detail),
+    url(r'^get_host_mem_usage/$', views.get_host_mem_usage),
+    url(r'^get_host_disk_usage/$', views.get_host_disk_usage),
 )

@@ -39,158 +39,173 @@
                     <table id="table2_demo1" class="table table-bordered table-hover dataTable no-footer" role="grid">
                         <thead>
                         <tr role="row">
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 15%;">内网IP</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 15%;">云区域</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 15%;">集群名</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 15%;">模块名</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 15%;">外网IP</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 15%;">维护人</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 10%;">详细信息</th>
+                            <th rowspan="1" colspan="1" style="width: 15%">内网IP</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 15%">云区域</th>
+                            <th rowspan="1" colspan="1" style="width: 15%">集群名</th>
+                            <th rowspan="1" colspan="1" style="width: 15%">模块名</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 15%">维护人</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 10%">详情</th>
                         </tr>
                         </thead>
                     </table>
-                    <template id="biz_tpl">
-                        <option value="#id#">#name#</option>
-                    </template>
-                    <div class="container-fluid mb0 ">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <table class="table mb0 pr15 ranger-box ">
-                                    <thead>
-                                    <tr>
-                                        <th style="width: 100px;">#</th>
-                                        <th style="width: 20%;">任务</th>
-                                        <th style="width: 20%;">进度</th>
-                                        <th style="width: 20%;">开发者</th>
-                                        <th>结束时间</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td style="width: 100px;">1</td>
-                                        <td style="width: 20%;">版本更新</td>
-                                        <td style="width: 20%;">完成</td>
-                                        <td style="width: 20%;">管理员</td>
-                                        <td>2015-09-20</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width: 100px;">2</td>
-                                        <td style="width: 20%;">数据备份</td>
-                                        <td style="width: 20%;">完成</td>
-                                        <td style="width: 20%;">管理员</td>
-                                        <td>2015-09-20</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width: 100px;">3</td>
-                                        <td style="width: 20%;">定时任务</td>
-                                        <td style="width: 20%;">完成</td>
-                                        <td style="width: 20%;">管理员</td>
-                                        <td>2015-09-20</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width: 100px;">4</td>
-                                        <td style="width: 20%;">修复bug</td>
-                                        <td style="width: 20%;">完成</td>
-                                        <td style="width: 20%;">管理员</td>
-                                        <td>2015-09-20</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="col-md-6">
-                                <table class="table mb0 pr15 ranger-box ">
-                                    <thead>
-                                    <tr>
-                                        <th style="width: 100px;">#</th>
-                                        <th style="width: 20%;">任务</th>
-                                        <th style="width: 20%;">进度</th>
-                                        <th style="width: 20%;">开发者</th>
-                                        <th>结束时间</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td style="width: 100px;">1</td>
-                                        <td style="width: 20%;">版本更新</td>
-                                        <td style="width: 20%;">完成</td>
-                                        <td style="width: 20%;">管理员</td>
-                                        <td>2015-09-20</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width: 100px;">2</td>
-                                        <td style="width: 20%;">数据备份</td>
-                                        <td style="width: 20%;">完成</td>
-                                        <td style="width: 20%;">管理员</td>
-                                        <td>2015-09-20</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width: 100px;">3</td>
-                                        <td style="width: 20%;">定时任务</td>
-                                        <td style="width: 20%;">完成</td>
-                                        <td style="width: 20%;">管理员</td>
-                                        <td>2015-09-20</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width: 100px;">4</td>
-                                        <td style="width: 20%;">修复bug</td>
-                                        <td style="width: 20%;">完成</td>
-                                        <td style="width: 20%;">管理员</td>
-                                        <td>2015-09-20</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <!-- 设置面板Start -->
-                                <template id="header_tpl_1558689265197">
-                                    <tr>
-                                        <th style="width: 100px;">#index#</th>
-                                        <th style="width: 20%;">#task#</th>
-                                        <th style="width: 20%;">#progress#</th>
-                                        <th style="width: 20%;">#host#</th>
-                                        <th>#date#</th>
-                                    </tr>
-                                </template>
-                                <template id="tpl_1558689265197">
-                                    <tr>
-                                        <td style="width: 100px;">#index#</td>
-                                        <td style="width: 20%;">#columnName1#</td>
-                                        <td style="width: 20%;">#columnName2#</td>
-                                        <td style="width: 20%;">#columnName3#</td>
-                                        <td>#columnName4#</td>
-                                    </tr>
-                                </template>
-                                <!-- 设置面板End -->
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="container-fluid mb0 ">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div style="height: 300px; -webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0); cursor: default;"
-                                     id="chart_1558688866271" class="king-chart-box chart-funnel "
-                                     _echarts_instance_="1558683569629"></div>
-                            </div>
-                            <div class="col-md-4">
-                                <div style="height: 300px; -webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0); cursor: default;"
-                                     id="chart_1558688870486" class="king-chart-box chart-funnel "
-                                     _echarts_instance_="1558683569630"></div>
-                            </div>
-                            <div class="col-md-4">
-                                <div style="height: 300px; -webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0); cursor: default;"
-                                     id="chart_1558688873267" class="king-chart-box chart-funnel "
-                                     _echarts_instance_="1558683569631"></div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">主机信息</h4>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group" id="host_detail">
+
+                    </ul>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div style="height: 300px; -webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0); cursor: default;"
+                                 id="chart_1558946888521" class="king-chart-box chart-funnel "
+                                 _echarts_instance_="1558946856870"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div style="height: 300px; -webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0); cursor: default;"
+                                 id="chart_1558946897217" class="king-chart-box chart-funnel "
+                                 _echarts_instance_="1558946856871"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <template id="biz_tpl">
+        <option value="#id#">#name#</option>
+    </template>
+    <template id="detail_tpl">
+
+        <li class="list-group-item">主机名称：#bk_host_name#</li>
+        <li class="list-group-item">操作系统：#bk_os_name# #bk_os_version# #bk_os_bit#</li>
+        <li class="list-group-item">CPU信息：#bk_cpu_module# #bk_cpu_mhz#MHZ</li>
+        <li class="list-group-item">内存大小：#bk_mem#M 磁盘容量：#bk_disk#G</li>
+        <li class="list-group-item">外网地址：#bk_host_outerip#</li>
+
+    </template>
 {% endblock %}
 {% block extra_block %}
     <script>
-        function createEInstrumentChart(conf) {
+        function renderTpl(str, cfg) {
+            var re = /(#(.+?)#)/g;
+            return str.replace(re, function () {
+                var val = cfg[arguments[2]] + '';
+                if (!val) {
+                    val = '--';
+                }
+                return val;
+            });
+        }
+
+        function search() {
+            var biz_id = $('#biz_id').val();
+            var table = $('#table2_demo1').DataTable({
+                autoWidth: true,
+                processing: true,
+                paging: true, //隐藏分页
+                ordering: false, //关闭排序
+                info: true, //隐藏左下角分页信息
+                searching: false, //关闭搜索
+                pageLength: 5, //每页显示几条数据
+                lengthChange: false, //不允许用户改变表格每页显示的记录数
+                columns: [
+                    {data: "host_innerip"},
+                    {data: "cloud_name"},
+                    {data: "set_name"},
+                    {data: "module_name"},
+                    {data: "operator"},
+                    {
+                        data: null,
+                        orderable: false,
+                        render: function (data) {
+                            return "<button class=\"king-btn king-info\" data-toggle=\"modal\" data-target=\"#myModal\" onclick=\"get_host_detail(" +
+                                biz_id + ",'" + data.host_innerip + "')\">查 看</button>";
+                        }
+                    }
+                ],
+                ajax: {
+                    url: '{{ SITE_URL }}get_host_by_bizid/',
+                    dataSrc: 'data',
+                    data: {'biz_id': biz_id},
+                },
+                language: {
+                    search: '搜索：',
+                    processing: '加载中',
+                    lengthMenu: "每页显示 _MENU_ 记录",
+                    zeroRecords: "没找到相应的数据！",
+                    info: "分页 _PAGE_ / _PAGES_",
+                    infoEmpty: "暂无数据！",
+                    infoFiltered: "(从 _MAX_ 条数据中搜索)",
+                    paginate: {
+                        first: '首页',
+                        last: '尾页',
+                        previous: '上一页',
+                        next: '下一页',
+                    }
+                }
+            });
+        }
+
+        function get_host_detail(biz_id, host_ip) {
+            $.get('{{ SITE_URL }}get_host_detail/',
+                {'biz_id': biz_id, 'host_ip': host_ip},
+                function (res) {
+                    if (res.result) {
+                        console.log(res.data);
+                        var _html = '';
+                        var tpl = $('#detail_tpl').html();
+                        _html += renderTpl(tpl, res.data);
+                        $('#host_detail').html(_html);
+                    } else {
+                        console.log("获取失败");
+                    }
+                }, 'json')
+        }
+
+        $(function () {
+            $.get('{{ SITE_URL }}get_biz_list/', function (res) {
+                if (res.result) {
+                    console.log(res.data);
+                    var _html = '';
+                    var list = res.data;
+                    var tpl = $('#biz_tpl').html();
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        var item = list[i];
+                        _html += renderTpl(tpl, item)
+                    }
+                    $('#biz_id').html(_html);
+                } else {
+                    console.log("获取失败");
+                }
+            }, 'json')
+
+            $('#myModal').on('shown.bs.modal', function () {
+                initEInstrumentChart({
+                    url: '{{ SITE_URL }}get_host_mem_usage/',
+                    dataType: 'json',
+                    containerId: 'chart_1558946888521'
+                });
+                initEInstrumentChart({
+                    url: '{{ SITE_URL }}get_host_disk_usage/',
+                    dataType: 'json',
+                    containerId: 'chart_1558946897217'
+                });
+            })
+        });
+    </script>
+    <script>
+function createEInstrumentChart(conf) {
             //--- 仪表盘 ---
             var myChart = echarts.init(document.getElementById(conf.selector));
             myChart.setOption({
@@ -301,6 +316,24 @@
                 ]
             });
         }
+        function createEInstrumentChart(conf) {
+            //--- 仪表盘 ---
+            var myChart = echarts.init(document.getElementById(conf.selector));
+            myChart.setOption({
+                tooltip: {
+                    formatter: "{a} {b} : {c}%"
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        mark: {show: true},
+                        restore: {show: true},
+                        saveAsImage: {show: true}
+                    }
+                },
+                series: conf.data.series
+            });
+        }
 
         function initEInstrumentChart(conf) {
             $.ajax({
@@ -319,138 +352,5 @@
                 }
             })
         }
-    </script>
-    <script>
-        {#$(function () {#}
-        {#    initEInstrumentChart({#}
-        {#        url: 'https://magicbox.bk.tencent.com/static_api/v3/components/chart25/demo.json',#}
-        {#        dataType: 'json',#}
-        {#        containerId: 'chart_1558600577948'#}
-        {#    });#}
-        {# });#}
-    </script>
-    <script>
-        {#$(function () {#}
-        {#    initEInstrumentChart({#}
-        {#        url: 'https://magicbox.bk.tencent.com/static_api/v3/components/chart25/demo.json',#}
-        {#        dataType: 'json',#}
-        {#        containerId: 'chart_1558600583917'#}
-        {#    });#}
-        {# });#}
-    </script>
-    <script>
-        {#$(function () {#}
-        {#    initEInstrumentChart({#}
-        {#        url: 'https://magicbox.bk.tencent.com/static_api/v3/components/chart25/demo.json',#}
-        {#        dataType: 'json',#}
-        {#        containerId: 'chart_1558600589048'#}
-        {#    });#}
-        {# });#}
-    </script>
-    <script>
-        function renderTpl(str, cfg) {
-            var re = /(#(.+?)#)/g;
-            return str.replace(re, function () {
-                var val = cfg[arguments[2]] + '';
-                if (typeof val == 'undefined') {
-                    val = '';
-                }
-                return val;
-            });
-        }
-
-        function get_detail(data) {
-            var host_detail = data;
-            var url = '${SITE_URL}' + 'api/get_log/' + celery_id + '/';
-            $.get(url, {}, function (res) {
-                if (res.result) {
-                    show_log(res.data);
-                } else {
-                    alert(res.message);
-                }
-            })
-        }
-
-        function show_detail(log_content) {
-            var d = dialog({
-                width: 800,
-                height: 500,
-                padding: 0,
-                //quickClose: true,
-                title: '日志详情',
-                content: log_content,
-            });
-            d.showModal();
-        }
-
-        function search() {
-            var biz_id = $('#biz_id').val();
-            var table = $('#table2_demo1').DataTable({
-                autoWidth: true,
-                processing: true,
-                paging: true, //隐藏分页
-                ordering: false, //关闭排序
-                info: true, //隐藏左下角分页信息
-                searching: false, //关闭搜索
-                pageLength: 5, //每页显示几条数据
-                lengthChange: false, //不允许用户改变表格每页显示的记录数
-                columns: [
-                    {data: "host_innerip"},
-                    {data: "cloud_name"},
-                    {data: "set_name"},
-                    {data: "module_name"},
-                    {data: "host_outerip"},
-                    {data: "operator"},
-                    {
-                        data: null,
-                        orderable: false,
-                        render: function (data) {
-                            return '<a class="king-btn king-info" href="javascript: get_detail(' + data.host_detail + ');">查 看</a>';
-                        }
-                    }
-                ],
-                ajax: {
-                    url: '{{ SITE_URL }}get_host_by_bizid/',
-                    type: 'POST',
-                    dataType: 'json',
-                    dataSrc: 'data',
-                    data: {'biz_id': biz_id},
-
-                },
-                language: {
-                    search: '搜索：',
-                    processing: '加载中',
-                    lengthMenu: "每页显示 _MENU_ 记录",
-                    zeroRecords: "没找到相应的数据！",
-                    info: "分页 _PAGE_ / _PAGES_",
-                    infoEmpty: "暂无数据！",
-                    infoFiltered: "(从 _MAX_ 条数据中搜索)",
-                    paginate: {
-                        first: '首页',
-                        last: '尾页',
-                        previous: '上一页',
-                        next: '下一页',
-                    }
-                }
-            });
-        }
-
-        $(function () {
-            $.get('{{ SITE_URL }}get_biz_list/', function (res) {
-                if (res.result) {
-                    console.log(res.data);
-                    var _html = '';
-                    var list = res.data;
-                    var tpl = $('#biz_tpl').html();
-                    for (var i = 0, len = list.length; i < len; i++) {
-                        var item = list[i];
-                        _html += renderTpl(tpl, item)
-                    }
-                    $('#biz_id').html(_html);
-                } else {
-                    console.log("获取失败");
-                }
-            }, 'json')
-        });
     </script>
 {% endblock %}

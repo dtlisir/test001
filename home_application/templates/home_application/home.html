@@ -57,7 +57,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel"></h4>
+                    <h4 class="modal-title" id="myModalLabel">IP: <span id="ip"></span>(业务ID: <span id="bid"></span>)
+                    </h4>
                 </div>
                 <div class="modal-body">
 
@@ -67,32 +68,40 @@
                                 详细信息
                             </a>
                         </li>
-                        <li><a href="#ios" data-toggle="tab">实时数据</a></li>
+                        <li><a href="#usage_data" data-toggle="tab">实时数据</a></li>
                     </ul>
-                    <div id="myTabContent" class="tab-content">
+                    <div id="myTabContent" class="tab-content" style="padding: 10px">
                         <div class="tab-pane fade in active" id="home">
                             <ul class="list-group" id="host_detail">
 
                             </ul>
                         </div>
-                        <div class="tab-pane fade" id="ios">
+                        <div class="tab-pane fade" id="usage_data">
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div style="height: 300px; -webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0); cursor: default;"
-                                         id="chart_1558946888521" class="king-chart-box chart-funnel "
-                                         _echarts_instance_="1558946856870"></div>
+                                <div class="col-md-6" id="mem_data">
+                                    <div style="height: 260px;width: 100%;display: table">
+                                        <div style="display: table-cell;text-align: center;vertical-align: middle">
+                                            <img alt="loadding"
+                                                 src="https://magicbox.bk.tencent.com/static_api/v3/components/loading1/images/loading_2_36x36.gif">
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <div class="col-md-6">
-                                    <div style="height: 300px; -webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0); cursor: default;"
-                                         id="chart_1558946897217" class="king-chart-box chart-funnel "
-                                         _echarts_instance_="1558946856871"></div>
+                                <div class="col-md-6" id="disk_data">
+                                    <div style="height: 260px;width: 100%;display: table">
+                                        <div style="display: table-cell;text-align: center;vertical-align: middle">
+                                            <img alt="loadding"
+                                                 src="https://magicbox.bk.tencent.com/static_api/v3/components/loading1/images/loading_2_36x36.gif">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                    <button type="button" class="king-btn king-info" data-dismiss="modal">关闭</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
@@ -101,13 +110,22 @@
         <option value="#id#">#name#</option>
     </template>
     <template id="detail_tpl">
-
         <li class="list-group-item">主机名称：#bk_host_name#</li>
         <li class="list-group-item">操作系统：#bk_os_name# #bk_os_version# #bk_os_bit#</li>
         <li class="list-group-item">CPU信息：#bk_cpu_module# #bk_cpu_mhz#MHZ</li>
         <li class="list-group-item">内存大小：#bk_mem#M 磁盘容量：#bk_disk#G</li>
         <li class="list-group-item">外网地址：#bk_host_outerip#</li>
+    </template>
+    <template id="mem_tpl">
+        <div style="height: 260px; -webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0); cursor: default;"
+             id="chart_1558946888521" class="king-chart-box chart-funnel "
+             _echarts_instance_="1558946856870"></div>
 
+    </template>
+    <template id="disk_tpl">
+        <div style="height: 260px; -webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0); cursor: default;"
+             id="chart_1558946897217" class="king-chart-box chart-funnel "
+             _echarts_instance_="1558946856871"></div>
     </template>
 {% endblock %}
 {% block extra_block %}
@@ -200,7 +218,7 @@
                             offsetCenter: [0, '100%'],       // x, y，单位px
                             textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
                                 color: '#333',
-                                fontSize: 20
+                                fontSize: 15
                             },
                         },
                         detail: {
@@ -228,9 +246,16 @@
             $.get(conf.url, conf.data,
                 function (res) {
                     //获取数据成功
+                    if (conf.containerId == "chart_1558946888521") {
+                        var tpl = $('#mem_tpl').html();
+                        $('#mem_data').html(tpl);
+                    }
+                    if (conf.containerId == "chart_1558946897217") {
+                        var tpl = $('#disk_tpl').html();
+                        $('#disk_data').html(tpl);
+                    }
                     if (res.result) {
                         var data = res.data;
-                        console.log(data);
                         createEInstrumentChart({
                             selector: conf.containerId, // 图表容器
                             data: {value: data.value, name: data.name}, // 图表数据
@@ -272,7 +297,7 @@
                         data: null,
                         orderable: false,
                         render: function (data) {
-                            return "<button class=\"king-btn king-info\" data-toggle=\"modal\" data-target=\"#myModal\" onclick=\"get_host_detail(" +
+                            return "<button class=\"king-btn king-info\" onclick=\"get_host_detail(" +
                                 biz_id + ",'" + data.host_innerip + "')\">查 看</button>";
                         }
                     }
@@ -301,7 +326,8 @@
         }
 
         function get_host_detail(biz_id, host_ip) {
-            $('#myModalLabel').html(host_ip);
+            $('#ip').text(host_ip);
+            $('#bid').text(biz_id.toString());
             $.get('{{ SITE_URL }}get_host_detail/',
                 {'biz_id': biz_id, 'host_ip': host_ip},
                 function (res) {
@@ -315,6 +341,7 @@
                         console.log("获取失败");
                     }
                 }, 'json');
+            $('#myModal').modal('show');
         }
 
         $(function () {
@@ -333,22 +360,22 @@
                     console.log("获取失败");
                 }
             }, 'json');
-
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                 // 获取已激活的标签页的名称
-
+                var host_ip = $('#ip').text();
+                var biz_id = $('#bid').text();
                 var activeTab = $(e.target).text();
-                if (activeTab == '实时数据'){
+                if (activeTab == '实时数据') {
                     initEInstrumentChart({
                         url: '{{ SITE_URL }}get_host_mem_usage/',
                         dataType: 'json',
-                        data: {'biz_id': 4, 'host_ip': '10.0.1.80'},
+                        data: {'biz_id': biz_id, 'host_ip': host_ip},
                         containerId: 'chart_1558946888521'
-                     });
+                    });
                     initEInstrumentChart({
                         url: '{{ SITE_URL }}get_host_disk_usage/',
                         dataType: 'json',
-                        data: {'biz_id': 4, 'host_ip': '10.0.1.80'},
+                        data: {'biz_id': biz_id, 'host_ip': host_ip},
                         containerId: 'chart_1558946897217'
                     });
                 }
